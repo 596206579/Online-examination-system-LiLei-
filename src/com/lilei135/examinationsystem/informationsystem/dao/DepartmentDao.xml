@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lilei135.examinationsystem.informationsystem.dao">
+    <select id="listDepartment" resultType="Department">
+        select * from Department
+    </select>
+
+    <insert id="addDepartment" parameterType="Department">
+        insert into department (department_name) values (#{departmentName})
+    </insert>
+
+    <delete id="deleteDepartment" parameterType="java.lang.String">
+        delete from department where department_id = #{departmentId}
+    </delete>
+
+    <select id="getDepartment" parameterType="java.lang.String" resultType="Department">
+        select * from department where department_id= #{departmentId}
+    </select>
+
+    <update id="updateDepartment" parameterType="Department">
+        update department set department_name=#{departmentName} where department_id = #{departmentId}
+    </update>
+</mapper>
