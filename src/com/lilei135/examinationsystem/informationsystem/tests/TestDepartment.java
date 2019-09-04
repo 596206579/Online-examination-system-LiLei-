@@ -34,7 +34,7 @@ public class TestDepartment {
     }
 
     private static void addDepartment(SqlSession session) {
-        Department department = new Department("英语系");
+        Department department = new Department(1, "英语系");
         session.insert("addDepartment", department);
     }
 }

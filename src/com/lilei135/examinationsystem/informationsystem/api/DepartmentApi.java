@@ -1,6 +1,7 @@
 package com.lilei135.examinationsystem.informationsystem.api;
 
 import com.lilei135.examinationsystem.informationsystem.models.Department;
+import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
 import resource.servletapi.BaseHttpServlet;
 
@@ -43,18 +44,27 @@ public class DepartmentApi extends BaseHttpServlet {
 
         Map<String, Object> jsonResult = getJson(request);
         String departmentName = (String) jsonResult.get("departmentName");
+        String departmentId = (String) jsonResult.get("departmentId");
 
         OutputStream out = response.getOutputStream();
-        if (departmentName == null) {
-            out.write(falseResponse("请输入部门"));
-        } else {
-            SqlSession session = getSession();
-            Department department = new Department(departmentName);
-            session.insert("addDepartment", department);
-            session.commit();
-            out.write(okResponse(""));
+        if (departmentName == null || departmentId == null) {
+            out.write(falseResponse("请输入部门名称或ID"));
+            out.flush();
+            return;
         }
 
+        SqlSession session = getSession();
+        Department department = new Department(Integer.parseInt(departmentId), departmentName);
+        try {
+            session.insert("addDepartment", department);
+        } catch (PersistenceException error) {
+            out.write(falseResponse("添加失败"));
+            out.flush();
+            return;
+        }
+
+        session.commit();
+        out.write(okResponse(""));
         out.flush();
     }
 
@@ -95,7 +105,7 @@ public class DepartmentApi extends BaseHttpServlet {
             out.write(falseResponse("没有这个部门"));
         } else {
             String departmentName = (String) json.get("departmentName");
-            Department newDepartment = new Department(Integer.valueOf(departmentId), departmentName);
+            Department newDepartment = new Department(Integer.parseInt(departmentId), departmentName);
             session.update("updateDepartment", newDepartment);
             session.commit();
             out.write(okResponse(""));
