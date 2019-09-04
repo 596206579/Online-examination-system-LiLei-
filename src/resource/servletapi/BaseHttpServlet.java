@@ -14,9 +14,7 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author wangsiqian
- */
+/** @author wangsiqian */
 public class BaseHttpServlet extends HttpServlet {
     private SqlSession session;
     private static final long serialVersionUID = 1L;
@@ -57,8 +55,8 @@ public class BaseHttpServlet extends HttpServlet {
     }
 
     public Map<String, Object> getJson(HttpServletRequest request) throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(
-                new InputStreamReader(request.getInputStream(), "utf-8"));
+        BufferedReader bufferedReader =
+                new BufferedReader(new InputStreamReader(request.getInputStream(), "utf-8"));
         StringBuilder stringBuilder = new StringBuilder();
         String line;
         while ((line = bufferedReader.readLine()) != null) {

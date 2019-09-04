@@ -13,9 +13,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Map;
 
-/**
- * @author wangsiqian
- */
+/** @author wangsiqian */
 @WebServlet("/v1/department")
 public class DepartmentApi extends BaseHttpServlet {
     @Override
@@ -25,7 +23,8 @@ public class DepartmentApi extends BaseHttpServlet {
         response.setCharacterEncoding("UTF-8");
 
         SqlSession session = getSession();
-        Department department = session.selectOne("getDepartment", request.getParameter("departmentId"));
+        Department department =
+                session.selectOne("getDepartment", request.getParameter("departmentId"));
 
         OutputStream out = response.getOutputStream();
         if (department == null) {
@@ -38,7 +37,8 @@ public class DepartmentApi extends BaseHttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         response.setContentType("application/json; charset=utf-8");
         response.setCharacterEncoding("UTF-8");
 
@@ -69,7 +69,8 @@ public class DepartmentApi extends BaseHttpServlet {
     }
 
     @Override
-    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         response.setContentType("application/json; charset=utf-8");
         response.setCharacterEncoding("UTF-8");
 
@@ -90,7 +91,8 @@ public class DepartmentApi extends BaseHttpServlet {
     }
 
     @Override
-    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPut(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         response.setContentType("application/json; charset=utf-8");
         response.setCharacterEncoding("UTF-8");
 
@@ -105,7 +107,8 @@ public class DepartmentApi extends BaseHttpServlet {
             out.write(falseResponse("没有这个部门"));
         } else {
             String departmentName = (String) json.get("departmentName");
-            Department newDepartment = new Department(Integer.parseInt(departmentId), departmentName);
+            Department newDepartment =
+                    new Department(Integer.parseInt(departmentId), departmentName);
             session.update("updateDepartment", newDepartment);
             session.commit();
             out.write(okResponse(""));
