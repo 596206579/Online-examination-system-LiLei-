@@ -12,8 +12,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 /** @author wangsiqian */
-@WebServlet("/v1/department")
-public class DepartmentApi extends BaseHttpServlet {
+@WebServlet("/api/v1/department")
+public class DepartmentController extends BaseHttpServlet {
     @Override
     protected byte[] handleGet(HttpServletRequest request) throws UnsupportedEncodingException {
         SqlSession session = getSession();
