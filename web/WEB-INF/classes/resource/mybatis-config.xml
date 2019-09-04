@@ -33,6 +33,7 @@
     <mappers>
         <mapper resource="com/lilei135/examinationsystem/informationsystem/dao/DepartmentDao.xml"/>
         <mapper resource="com/lilei135/examinationsystem/informationsystem/dao/ProfessionDao.xml"/>
+        <mapper resource="com/lilei135/examinationsystem/informationsystem/dao/ClassDao.xml"/>
     </mappers>
 
 </configuration>

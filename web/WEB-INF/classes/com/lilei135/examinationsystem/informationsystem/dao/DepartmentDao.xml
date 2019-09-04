@@ -6,7 +6,7 @@
 
 <mapper namespace="com.lilei135.examinationsystem.informationsystem.dao">
     <select id="listDepartment" resultType="Department">
-        select * from Department
+        select * from department
     </select>
 
     <insert id="addDepartment" parameterType="Department">
