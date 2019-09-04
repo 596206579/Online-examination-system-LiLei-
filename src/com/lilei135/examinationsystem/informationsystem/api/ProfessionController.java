@@ -45,13 +45,18 @@ public class ProfessionController extends BaseHttpServlet {
             return falseResponse("没有这个部门");
         }
 
-        Profession profession =
+        Profession profession = session.selectOne("getProfession", professionId);
+        if (profession != null) {
+            return falseResponse("该专业已经存在");
+        }
+
+        Profession newProfession =
                 new Profession(
                         Integer.parseInt(professionId),
                         department.getDepartmentId(),
                         professionName);
         try {
-            session.insert("addProfession", profession);
+            session.insert("addProfession", newProfession);
         } catch (PersistenceException error) {
             return falseResponse("添加失败");
         }
