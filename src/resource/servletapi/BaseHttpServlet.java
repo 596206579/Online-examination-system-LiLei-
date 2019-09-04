@@ -10,12 +10,13 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
 /** @author wangsiqian */
-public class BaseHttpServlet extends HttpServlet {
+public abstract class BaseHttpServlet extends HttpServlet {
     private SqlSession session;
     private static final long serialVersionUID = 1L;
 
@@ -32,6 +33,66 @@ public class BaseHttpServlet extends HttpServlet {
         this.session = sqlSessionFactory.openSession();
 
         super.init();
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        resp.setContentType("application/json; charset=utf-8");
+        resp.setCharacterEncoding("UTF-8");
+
+        OutputStream out = resp.getOutputStream();
+        out.write(handleGet(req));
+        out.flush();
+    }
+
+    protected byte[] handleGet(HttpServletRequest request) throws UnsupportedEncodingException {
+        return falseResponse("不支持Get 请求");
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        resp.setContentType("application/json; charset=utf-8");
+        resp.setCharacterEncoding("UTF-8");
+
+        OutputStream out = resp.getOutputStream();
+        out.write(handlePost(req));
+        out.flush();
+    }
+
+    protected byte[] handlePost(HttpServletRequest request) throws UnsupportedEncodingException, IOException {
+        return falseResponse("不支持Post 请求");
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        resp.setContentType("application/json; charset=utf-8");
+        resp.setCharacterEncoding("UTF-8");
+
+        OutputStream out = resp.getOutputStream();
+        out.write(handlePut(req));
+        out.flush();
+    }
+
+    protected byte[] handlePut(HttpServletRequest request) throws UnsupportedEncodingException, IOException {
+        return falseResponse("不支持Put 请求");
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        resp.setContentType("application/json; charset=utf-8");
+        resp.setCharacterEncoding("UTF-8");
+
+        OutputStream out = resp.getOutputStream();
+        out.write(handleDelete(req));
+        out.flush();
+    }
+
+    protected byte[] handleDelete(HttpServletRequest request) throws UnsupportedEncodingException {
+        return falseResponse("不支持Delete 请求");
     }
 
     @Override
