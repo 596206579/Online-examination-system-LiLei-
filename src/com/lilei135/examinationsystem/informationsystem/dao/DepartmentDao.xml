@@ -10,7 +10,7 @@
     </select>
 
     <insert id="addDepartment" parameterType="Department">
-        insert into department (department_name) values (#{departmentName})
+        insert into department (department_id, department_name) values (#{departmentId}, #{departmentName})
     </insert>
 
     <delete id="deleteDepartment" parameterType="java.lang.String">
@@ -18,7 +18,7 @@
     </delete>
 
     <select id="getDepartment" parameterType="java.lang.String" resultType="Department">
-        select * from department where department_id= #{departmentId}
+        select * from department where department_id = #{departmentId}
     </select>
 
     <update id="updateDepartment" parameterType="Department">
