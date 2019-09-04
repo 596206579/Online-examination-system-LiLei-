@@ -10,23 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 /** @author wangsiqian */
 @WebServlet("/v1/departments")
 public class ListDepartmentApi extends BaseHttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("application/json; charset=utf-8");
-        response.setCharacterEncoding("UTF-8");
-
+    protected byte[] handleGet(HttpServletRequest request) throws UnsupportedEncodingException {
         SqlSession session = getSession();
         List<Department> departments = session.selectList("listDepartment");
         session.commit();
-
-        OutputStream out = response.getOutputStream();
-        out.write(okResponse(departments));
-        out.flush();
+        return okResponse(departments);
     }
 }
