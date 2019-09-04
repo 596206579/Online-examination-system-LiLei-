@@ -13,7 +13,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 /** @author wangsiqian */
-@WebServlet("/api/v1/profession")
+@WebServlet("/v1/profession")
 public class ProfessionController extends BaseHttpServlet {
     @Override
     protected byte[] handleGet(HttpServletRequest request) throws UnsupportedEncodingException {

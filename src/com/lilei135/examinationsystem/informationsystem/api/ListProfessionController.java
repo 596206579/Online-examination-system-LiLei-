@@ -10,7 +10,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 /** @author wangsiqian */
-@WebServlet("/api/v1/professions")
+@WebServlet("/v1/professions")
 public class ListProfessionController extends BaseHttpServlet {
     @Override
     protected byte[] handleGet(HttpServletRequest request) throws UnsupportedEncodingException {

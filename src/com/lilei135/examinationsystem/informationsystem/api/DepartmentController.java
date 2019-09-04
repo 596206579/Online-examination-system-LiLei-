@@ -12,7 +12,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 /** @author wangsiqian */
-@WebServlet("/api/v1/department")
+@WebServlet("/v1/department")
 public class DepartmentController extends BaseHttpServlet {
     @Override
     protected byte[] handleGet(HttpServletRequest request) throws UnsupportedEncodingException {
@@ -38,9 +38,14 @@ public class DepartmentController extends BaseHttpServlet {
         }
 
         SqlSession session = getSession();
-        Department department = new Department(Integer.parseInt(departmentId), departmentName);
+        Department department = session.selectOne("getDepartment", departmentId);
+        if (department != null) {
+            return falseResponse("该部门已经存在");
+        }
+
+        Department newDepartment = new Department(Integer.parseInt(departmentId), departmentName);
         try {
-            session.insert("addDepartment", department);
+            session.insert("addDepartment", newDepartment);
         } catch (PersistenceException error) {
             return falseResponse("添加失败");
         }

@@ -13,7 +13,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 /** @author wangsiqian */
-@WebServlet("/api/v1/student")
+@WebServlet("/v1/student")
 public class StudentController extends BaseHttpServlet {
     @Override
     protected byte[] handleGet(HttpServletRequest request) throws UnsupportedEncodingException {
@@ -45,10 +45,15 @@ public class StudentController extends BaseHttpServlet {
             return falseResponse("没有这个班级");
         }
 
-        Student student =
+        Student student = session.selectOne("getStudent", studentId);
+        if (student != null) {
+            return falseResponse("该学生已经存在");
+        }
+
+        Student newStudent =
                 new Student(studentId, queryClass.getClassId(), studentName, studentGender);
         try {
-            session.insert("addStudent", student);
+            session.insert("addStudent", newStudent);
         } catch (PersistenceException error) {
             return falseResponse("添加失败");
         }

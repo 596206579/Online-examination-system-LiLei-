@@ -14,7 +14,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 /** @author wangsiqian */
-@WebServlet("/api/v1/departments")
+@WebServlet("/v1/departments")
 public class ListDepartmentController extends BaseHttpServlet {
     @Override
     protected byte[] handleGet(HttpServletRequest request) throws UnsupportedEncodingException {
