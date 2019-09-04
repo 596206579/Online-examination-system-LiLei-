@@ -12,16 +12,13 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
-/**
- * @author wangsiqian
- */
+/** @author wangsiqian */
 @WebServlet("/api/v1/class")
 public class ClassController extends BaseHttpServlet {
     @Override
     protected byte[] handleGet(HttpServletRequest request) throws UnsupportedEncodingException {
         SqlSession session = getSession();
-        Class queryClass =
-                session.selectOne("getClass", request.getParameter("classId"));
+        Class queryClass = session.selectOne("getClass", request.getParameter("classId"));
         if (queryClass == null) {
             return falseResponse("没有这个班级");
         } else {
@@ -30,7 +27,8 @@ public class ClassController extends BaseHttpServlet {
     }
 
     @Override
-    protected byte[] handlePost(HttpServletRequest request) throws UnsupportedEncodingException, IOException {
+    protected byte[] handlePost(HttpServletRequest request)
+            throws UnsupportedEncodingException, IOException {
         Map<String, Object> jsonResult = getJson(request);
         String classId = (String) jsonResult.get("classId");
         String professionId = (String) jsonResult.get("professionId");
@@ -47,11 +45,9 @@ public class ClassController extends BaseHttpServlet {
         }
 
         Class newClass =
-                new Class(Integer.parseInt(classId),
-                        profession.getProfessionId(),
-                        className);
+                new Class(Integer.parseInt(classId), profession.getProfessionId(), className);
 
-        try{
+        try {
             session.insert("addClass", newClass);
         } catch (PersistenceException error) {
             return falseResponse("添加失败");
@@ -62,7 +58,8 @@ public class ClassController extends BaseHttpServlet {
     }
 
     @Override
-    protected byte[] handlePut(HttpServletRequest request) throws UnsupportedEncodingException, IOException {
+    protected byte[] handlePut(HttpServletRequest request)
+            throws UnsupportedEncodingException, IOException {
         Map<String, Object> jsonResult = getJson(request);
         String classId = (String) jsonResult.get("classId");
 
@@ -82,12 +79,11 @@ public class ClassController extends BaseHttpServlet {
             queryClass.setClassName(className);
         }
 
-        session.update("updateClass", queryClass);
-//        try{
-//            session.update("updateClass", queryClass);
-//        } catch (PersistenceException error) {
-//            return falseResponse("更新失败");
-//        }
+        try {
+            session.update("updateClass", queryClass);
+        } catch (PersistenceException error) {
+            return falseResponse("更新失败");
+        }
 
         session.commit();
         return okResponse("更新成功");
@@ -102,7 +98,7 @@ public class ClassController extends BaseHttpServlet {
             return falseResponse("没有这个班级");
         }
 
-        try{
+        try {
             session.delete("deleteClass", classId);
         } catch (PersistenceException error) {
             return falseResponse("删除失败");
