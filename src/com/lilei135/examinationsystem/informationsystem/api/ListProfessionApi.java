@@ -1,6 +1,6 @@
 package com.lilei135.examinationsystem.informationsystem.api;
 
-import com.lilei135.examinationsystem.informationsystem.models.Department;
+import com.lilei135.examinationsystem.informationsystem.models.Profession;
 import org.apache.ibatis.session.SqlSession;
 import resource.servletapi.BaseHttpServlet;
 
@@ -13,8 +13,8 @@ import java.io.OutputStream;
 import java.util.List;
 
 /** @author wangsiqian */
-@WebServlet("/v1/departments")
-public class ListDepartmentApi extends BaseHttpServlet {
+@WebServlet("/v1/professions")
+public class ListProfessionApi extends BaseHttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -22,11 +22,11 @@ public class ListDepartmentApi extends BaseHttpServlet {
         response.setCharacterEncoding("UTF-8");
 
         SqlSession session = getSession();
-        List<Department> departments = session.selectList("listDepartment");
+        List<Profession> professions = session.selectList("listProfession");
         session.commit();
 
         OutputStream out = response.getOutputStream();
-        out.write(okResponse(departments));
+        out.write(okResponse(professions));
         out.flush();
     }
 }

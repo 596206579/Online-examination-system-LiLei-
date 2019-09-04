@@ -1,11 +1,13 @@
 package com.lilei135.examinationsystem.informationsystem.models;
 
-/**
- * @author wangsiqian
- */
+/** @author wangsiqian */
 public class Department {
     private int departmentId;
     private String departmentName;
+
+    public Department(int departmentId) {
+        this.departmentId = departmentId;
+    }
 
     public Department(int departmentId, String departmentName) {
         this.departmentId = departmentId;

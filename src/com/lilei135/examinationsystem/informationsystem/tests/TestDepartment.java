@@ -9,9 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * @author wangsiqian
- */
+/** @author wangsiqian */
 public class TestDepartment {
     public static void main(String[] args) throws IOException {
         // 根据 mybatis-config.xml 配置的信息得到 sqlSessionFactory
@@ -21,7 +19,7 @@ public class TestDepartment {
         // 然后根据 sqlSessionFactory 得到 session
         SqlSession session = sqlSessionFactory.openSession();
 
-//        getDepartment(session, "1");
+        //        getDepartment(session, "1");
         addDepartment(session);
 
         session.commit();
@@ -30,7 +28,7 @@ public class TestDepartment {
 
     private static void getDepartment(SqlSession session, String departmentID) {
         Department department = session.selectOne("getDepartment", departmentID);
-        System.out.println(department.getDepartmentId() + " " +  department.getDepartmentName());
+        System.out.println(department.getDepartmentId() + " " + department.getDepartmentName());
     }
 
     private static void addDepartment(SqlSession session) {

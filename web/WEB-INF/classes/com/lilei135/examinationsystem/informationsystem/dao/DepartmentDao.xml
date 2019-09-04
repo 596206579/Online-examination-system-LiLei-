@@ -18,7 +18,7 @@
     </delete>
 
     <select id="getDepartment" parameterType="java.lang.String" resultType="Department">
-        select * from department where department_id=#{departmentId}
+        select * from department where department_id = #{departmentId}
     </select>
 
     <update id="updateDepartment" parameterType="Department">
