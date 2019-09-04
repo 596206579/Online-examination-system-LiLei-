@@ -57,7 +57,7 @@ public class ProfessionController extends BaseHttpServlet {
         }
 
         session.commit();
-        return okResponse("");
+        return okResponse("添加成功");
     }
 
     @Override
@@ -72,32 +72,25 @@ public class ProfessionController extends BaseHttpServlet {
             return falseResponse("没有这个专业");
         }
 
-        Profession newProfession = new Profession(profession.getProfessionId());
-
         String professionName = (String) json.get("professionName");
         if (professionName != null) {
             // 设置新的专业名
-            newProfession.setProfessionName(professionName);
-        } else {
-            // 没有修改则传入原本的名称
-            newProfession.setProfessionName(profession.getProfessionName());
+            profession.setProfessionName(professionName);
         }
 
         String departmentId = (String) json.get("departmentId");
         if (departmentId != null) {
-            newProfession.setDepartmentId(Integer.parseInt(departmentId));
-        } else {
-            newProfession.setDepartmentId(profession.getDepartmentId());
+            profession.setDepartmentId(Integer.parseInt(departmentId));
         }
 
-        try{
-            session.update("updateProfession", newProfession);
+        try {
+            session.update("updateProfession", profession);
         } catch (PersistenceException error) {
             return falseResponse("更新失败");
         }
 
         session.commit();
-        return okResponse("");
+        return okResponse("更新成功");
     }
 
     @Override
@@ -110,13 +103,12 @@ public class ProfessionController extends BaseHttpServlet {
             return falseResponse("没有这个专业");
         }
 
-        try{
+        try {
             session.delete("deleteProfession", professionId);
         } catch (PersistenceException error) {
             return falseResponse("删除失败");
         }
         session.commit();
-        return okResponse("");
-
+        return okResponse("删除成功");
     }
 }

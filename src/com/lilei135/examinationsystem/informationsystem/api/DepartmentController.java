@@ -46,7 +46,7 @@ public class DepartmentController extends BaseHttpServlet {
         }
 
         session.commit();
-        return okResponse("");
+        return okResponse("添加成功");
     }
 
     @Override
@@ -66,15 +66,14 @@ public class DepartmentController extends BaseHttpServlet {
             return falseResponse("请输入新的系名");
         }
 
-        Department newDepartment = new Department(Integer.parseInt(departmentId), departmentName);
-
+        department.setDepartmentName(departmentName);
         try {
-            session.update("updateDepartment", newDepartment);
+            session.update("updateDepartment", department);
         } catch (PersistenceException error) {
             return falseResponse("更新失败");
         }
         session.commit();
-        return okResponse("");
+        return okResponse("更新成功");
     }
 
     @Override
@@ -94,6 +93,6 @@ public class DepartmentController extends BaseHttpServlet {
         }
 
         session.commit();
-        return okResponse("");
+        return okResponse("删除成功");
     }
 }
