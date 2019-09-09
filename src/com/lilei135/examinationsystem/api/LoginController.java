@@ -5,29 +5,16 @@ import com.lilei135.examinationsystem.models.Teacher;
 import org.apache.ibatis.session.SqlSession;
 import resource.servletapi.BaseHttpServlet;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.Map;
 
 /** @author wangsiqian */
 @WebServlet("/v1/login")
 public class LoginController extends BaseHttpServlet {
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        resp.setContentType("application/json; charset=utf-8");
-        resp.setCharacterEncoding("UTF-8");
-
-        OutputStream out = resp.getOutputStream();
-        out.write(handlePost(req, resp));
-        out.flush();
-    }
-
     protected byte[] handlePost(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         Map<String, Object> jsonResult = getJson(request);

@@ -11,11 +11,10 @@
 
     <insert id="addPaper" parameterType="Paper">
         insert into paper (
-        paper_id,
         student_id,
         paper_grade,
         paper_subject)
-        values (#{paperId}, #{studentId}, #{paperGrade}, #{paperSubject})
+        values (#{studentId}, #{paperGrade}, #{paperSubject})
     </insert>
 
     <delete id="deletePaper" parameterType="java.lang.String">
@@ -23,7 +22,7 @@
     </delete>
 
     <select id="getPaper" parameterType="java.lang.String" resultType="Paper">
-        select * from paper where paper_id = #{paperId}
+        select * from paper where paper_id=#{paperId}
     </select>
 
     <update id="updatePaper" parameterType="Paper">

@@ -27,23 +27,24 @@ public class PaperController extends BaseHttpServlet {
     protected byte[] handlePost(HttpServletRequest request)
             throws UnsupportedEncodingException, IOException {
         Map<String, Object> jsonResult = getJson(request);
-        String paperId = (String) jsonResult.get("paperId");
         String studentId = (String) jsonResult.get("studentId");
         String paperGrade = (String) jsonResult.get("paperGrade");
         String paperSubject = (String) jsonResult.get("paperSubject");
 
-        if (paperId == null || studentId == null || paperGrade == null || paperSubject == null) {
+        if (studentId == null || paperGrade == null || paperSubject == null) {
             return falseResponse("请输入试卷Id, 学生Id, 分数, 科目");
         }
 
-        SqlSession session;
-        return super.handlePost(request);
-    }
+        Paper newPaper = new Paper(studentId, Integer.parseInt(paperGrade), paperSubject);
+        SqlSession session = getSession();
+        try {
+            session.insert("addPaper", newPaper);
+        } catch (PersistenceException error) {
+            return falseResponse("添加失败");
+        }
 
-    @Override
-    protected byte[] handlePut(HttpServletRequest request)
-            throws UnsupportedEncodingException, IOException {
-        return super.handlePut(request);
+        session.commit();
+        return okResponse("添加成功");
     }
 
     @Override
@@ -56,7 +57,7 @@ public class PaperController extends BaseHttpServlet {
             return falseResponse("没有这个提交记录");
         }
 
-        try{
+        try {
             session.delete("deletePaper", paperId);
         } catch (PersistenceException error) {
             return falseResponse("删除失败");

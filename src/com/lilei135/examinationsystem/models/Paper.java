@@ -3,15 +3,22 @@ package com.lilei135.examinationsystem.models;
 /** @author wangsiqian */
 public class Paper {
     private int paperId;
-    private int studentId;
+    private String  studentId;
     private int paperGrade;
     private String paperSubject;
 
-    public Paper(int paperId, int studentId, int paperGrade, String paperSubject) {
-        this.paperId = paperId;
+    public Paper(String studentId, int paperGrade, String paperSubject) {
         this.studentId = studentId;
         this.paperGrade = paperGrade;
         this.paperSubject = paperSubject;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
 
     public int getPaperId() {
@@ -20,14 +27,6 @@ public class Paper {
 
     public void setPaperId(int paperId) {
         this.paperId = paperId;
-    }
-
-    public int getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(int studentId) {
-        this.studentId = studentId;
     }
 
     public int getPaperGrade() {
