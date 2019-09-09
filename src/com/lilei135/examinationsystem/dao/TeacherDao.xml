@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lilei135.examinationsystem.dao">
+    <select id="listTeacher" resultType="Teacher">
+        select * from teacher
+    </select>
+
+    <insert id="addTeacher" parameterType="Teacher">
+        insert into teacher (
+        teacher_id, teacher_password, teacher_name, teacher_level)
+        values (#{teacherId}, #{teacherPassword}, #{teacherName}, #{teacherLevel})
+    </insert>
+
+    <delete id="deleteTeacher" parameterType="java.lang.String">
+        delete from teacher where teacher_id=#{TeacherId}
+    </delete>
+
+    <select id="getTeacher" parameterType="java.lang.String" resultType="Teacher">
+        select * from teacher where Teacher_id=#{TeacherId}
+    </select>
+
+    <update id="updateTeacher" parameterType="Teacher">
+        update teacher set
+        teacher_name=#{teacherName},
+         teacher_level=#{teacherLevel},
+         teacher_password=#{teacherPassowrd},
+         where teacher_id=#{teacherId}
+    </update>
+</mapper>

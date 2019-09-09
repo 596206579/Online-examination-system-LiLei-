@@ -31,12 +31,13 @@
     </environments>
 
     <mappers>
-        <mapper resource="com/lilei135/examinationsystem/informationsystem/dao/DepartmentDao.xml"/>
-        <mapper resource="com/lilei135/examinationsystem/informationsystem/dao/ProfessionDao.xml"/>
-        <mapper resource="com/lilei135/examinationsystem/informationsystem/dao/ClassDao.xml"/>
-        <mapper resource="com/lilei135/examinationsystem/informationsystem/dao/StudentDao.xml"/>
-        <mapper resource="com/lilei135/examinationsystem/informationsystem/dao/TeacherDao.xml"/>
-        <mapper resource="com/lilei135/examinationsystem/informationsystem/dao/CourseDao.xml"/>
+        <mapper resource="com/lilei135/examinationsystem/dao/DepartmentDao.xml"/>
+        <mapper resource="com/lilei135/examinationsystem/dao/ProfessionDao.xml"/>
+        <mapper resource="com/lilei135/examinationsystem/dao/ClassDao.xml"/>
+        <mapper resource="com/lilei135/examinationsystem/dao/StudentDao.xml"/>
+        <mapper resource="com/lilei135/examinationsystem/dao/TeacherDao.xml"/>
+        <mapper resource="com/lilei135/examinationsystem/dao/CourseDao.xml"/>
+        <mapper resource="com/lilei135/examinationsystem/dao/PaperDao.xml"/>
     </mappers>
 
 </configuration>

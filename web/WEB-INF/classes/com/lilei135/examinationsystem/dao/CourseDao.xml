@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lilei135.examinationsystem.dao">
+    <select id="listCourse" resultType="Course">
+        select * from course
+    </select>
+
+    <insert id="addCourse" parameterType="Course">
+        insert into course (course_id, teacher_id, class_id, course_name, course_status)
+        values(#{courseId}, #{teacherId}, #{classId}, #{courseName}, #{courseStatus})
+    </insert>
+
+    <delete id="deleteCourse" parameterType="java.lang.String">
+        delete from course where course_id=#{courseId}
+    </delete>
+
+    <select id="getCourse" parameterType="java.lang.String" resultType="Course">
+        select * from course where course_id = #{courseId}
+    </select>
+
+    <update id="updateCourse" parameterType="Course">
+        update course set
+        course_name=#{courseName},
+        teacher_id=#{teacherId},
+        class_id=#{classId},
+        course_name=#{courseName},
+        course_status=#{courseStatus}
+        where course_id=#{courseId}
+    </update>
+</mapper>

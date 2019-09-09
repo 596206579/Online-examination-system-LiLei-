@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lilei135.examinationsystem.dao">
+    <select id="listPaper" resultType="Paper">
+        select * from paper
+    </select>
+
+    <insert id="addPaper" parameterType="Paper">
+        insert into paper (
+        student_id,
+        paper_grade,
+        paper_subject)
+        values (#{studentId}, #{paperGrade}, #{paperSubject})
+    </insert>
+
+    <delete id="deletePaper" parameterType="java.lang.String">
+        delete from paper where paper_id=#{paperId}
+    </delete>
+
+    <select id="getPaper" parameterType="java.lang.String" resultType="Paper">
+        select * from paper where paper_id=#{paperId}
+    </select>
+
+    <update id="updatePaper" parameterType="Paper">
+        update Paper set
+        student_id=#{studentId},
+        paper_grade=#{paperGrade},
+        paper_subject=#{paperSubject}
+        where paper_id=#{paperId}
+    </update>
+</mapper>

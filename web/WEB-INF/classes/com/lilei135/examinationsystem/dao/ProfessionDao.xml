@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lilei135.examinationsystem.dao">
+    <select id="listProfession" resultType="Profession">
+        select * from profession
+    </select>
+
+    <insert id="addProfession" parameterType="Profession">
+        insert into profession (profession_id, profession_name, department_id) values (#{professionId}, #{professionName}, #{departmentId})
+    </insert>
+
+    <delete id="deleteProfession" parameterType="java.lang.String">
+        delete from profession where profession_id=#{professionId}
+    </delete>
+
+    <select id="getProfession" parameterType="java.lang.String" resultType="Profession">
+        select * from profession where profession_id = #{professionId}
+    </select>
+
+    <update id="updateProfession" parameterType="Profession">
+        update profession set profession_name=#{professionName}, department_id=#{departmentId} where profession_id=#{professionId}
+    </update>
+</mapper>
