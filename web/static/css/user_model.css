@@ -1,0 +1,24 @@
+.mudel {
+	padding: 50px 20px 50px 40px;
+	line-height: 50px;
+	color: darkgray;
+}
+
+#mudel1 {
+	display: block;
+	color: darkgray
+}
+
+.mudel2 {
+	position: absolute;
+	/* left: 500px; */
+	top: 124.5px;
+	left: 40%;
+}
+
+.picture {
+	position: absolute;
+	/* left: 800px; */
+	top: 130px;
+	left: 75%;
+}

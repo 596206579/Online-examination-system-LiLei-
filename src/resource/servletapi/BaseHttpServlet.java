@@ -46,7 +46,7 @@ public abstract class BaseHttpServlet extends HttpServlet {
         out.flush();
     }
 
-    protected byte[] handleGet(HttpServletRequest request) throws UnsupportedEncodingException {
+    protected byte[] handleGet(HttpServletRequest request) throws IOException {
         return falseResponse("不支持Get 请求");
     }
 
@@ -61,7 +61,8 @@ public abstract class BaseHttpServlet extends HttpServlet {
         out.flush();
     }
 
-    protected byte[] handlePost(HttpServletRequest request) throws UnsupportedEncodingException, IOException {
+    protected byte[] handlePost(HttpServletRequest request)
+            throws UnsupportedEncodingException, IOException {
         return falseResponse("不支持Post 请求");
     }
 
@@ -76,7 +77,8 @@ public abstract class BaseHttpServlet extends HttpServlet {
         out.flush();
     }
 
-    protected byte[] handlePut(HttpServletRequest request) throws UnsupportedEncodingException, IOException {
+    protected byte[] handlePut(HttpServletRequest request)
+            throws UnsupportedEncodingException, IOException {
         return falseResponse("不支持Put 请求");
     }
 
@@ -128,5 +130,9 @@ public abstract class BaseHttpServlet extends HttpServlet {
 
     public SqlSession getSession() {
         return session;
+    }
+
+    public String getResourcePath(HttpServletRequest request) {
+        return request.getServletContext().getRealPath("") + "WEB-INF/classes/resource/";
     }
 }
